@@ -84,11 +84,21 @@ function changeMode() {
     if (this.textContent === "Easy") {
         modeButtons[0].classList.add("selected");
         modeButtons[1].classList.remove("selected");
+        modeButtons[2].classList.remove("selected");
         numOfSquares = 3;
-    } else {
+        document.querySelector("#container").style.maxWidth = "600px"
+    } else if (this.textContent === "Hard") {
         modeButtons[0].classList.remove("selected");
         modeButtons[1].classList.add("selected");
+        modeButtons[2].classList.remove("selected");
         numOfSquares = 6;
+        document.querySelector("#container").style.maxWidth = "600px"
+    } else {
+        modeButtons[0].classList.remove("selected");
+        modeButtons[1].classList.remove("selected");
+        modeButtons[2].classList.add("selected");
+        numOfSquares = 16;
+        document.querySelector("#container").style.maxWidth = "800px"
     }
     setColors(numOfSquares);
 }

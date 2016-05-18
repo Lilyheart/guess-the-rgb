@@ -47,9 +47,9 @@ button:hover, .selected  {
     max-width: 600px;
 }
 .square {
-    width: 30%;
-    padding-bottom: 30%;
-    margin: 1.66%;
+    width: 180px;
+    margin: 10px;
+    padding-bottom: 180px;
     float: left;
     background: #232323;
     transition: background 0.6s;
