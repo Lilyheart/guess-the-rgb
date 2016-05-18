@@ -34,7 +34,7 @@ button, button:focus, .btn{
     text-transform: uppercase;
     height: 100%;
     font-weight: 700;
-    color: steelblue;
+    color: steelblue !important;
     letter-spacing: 0.7px;
     font-size: inherit;
     transition: all 0.3s/;
