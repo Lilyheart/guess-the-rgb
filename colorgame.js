@@ -130,12 +130,17 @@ function setModeOptions(str) {
         document.querySelector("#container").style.maxWidth = "600px";
     } else {
         numOfSquares = 16;
+        document.querySelector(".mode").innerHTML = "Hardest <span class=\"caret\">";
         document.querySelector("#container").style.maxWidth = "800px";
     }
 }
 
 function changeRange() {
-    document.querySelector(".range").innerHTML = this.textContent + " <span class=\"caret\">";
+    if(this.textContent === "Full") {
+        document.querySelector(".range").innerHTML = "Full Colors <span class=\"caret\">";
+    } else {
+        document.querySelector(".range").innerHTML = "Close Colors <span class=\"caret\">";
+    }
     colorRange = this.textContent;
     resetText();
 }
