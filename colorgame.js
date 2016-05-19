@@ -67,14 +67,11 @@ function changeAllSquareColors(color) {
 function generateRandomColors(num) {
     var arr = [];
     arr.push(randomColor());
-    console.log("Color 0: " + arr[0]);
     for (var i = 1; i < num; i++) {
         if(colorRange === "Full"){
             arr.push(randomColor());
-            console.log("Color "+i+": " + arr[i]);
         } else {
             arr.push(closeRandomColor(arr[i-1]));
-            console.log("Color "+i+": " + arr[i]);
         }
     }
     arr = shuffleColors(arr);
