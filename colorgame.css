@@ -59,7 +59,7 @@ button:hover, .selected, .dropdown-menu>li>a:hover  {
     margin: 40px auto;
     max-width: 600px;
 }
-.square {
+.colorGuess {
     width: 180px;
     margin: 10px;
     padding-bottom: 180px;

@@ -1,9 +1,9 @@
 var colors;
 var winningColor;
-var numOfSquares = 6;
+var numOfGuesses = 6;
 var colorRange = "Full"; // 0 = full, 1 = david
 var background = window.getComputedStyle(document.querySelector("body"), null).getPropertyValue("background-color");
-var squares = document.querySelectorAll(".square");
+var possibleGuesses = document.querySelectorAll(".colorGuess");
 var messageDisplay = document.querySelector("#message");
 var resetButton = document.getElementById("reset");
 var modeButtons = document.querySelectorAll(".modeButton");
@@ -12,12 +12,12 @@ var rangeButtons = document.querySelectorAll(".rangeButton");
 init();
 
 function init() {
-    for (var i = 0; i < squares.length; i++) {
-        squares[i].addEventListener("click", function() {
+    for (var i = 0; i < possibleGuesses.length; i++) {
+        possibleGuesses[i].addEventListener("click", function() {
             if (this.style.background === winningColor) {
                 messageDisplay.textContent = "Correct!";
                 resetButton.textContent = "Play again";
-                changeAllSquareColors(winningColor);
+                changeAllColors(winningColor);
                 document.querySelector("h1").style.background = winningColor;
             } else {
                 messageDisplay.textContent = "Try Again";
@@ -38,29 +38,29 @@ function init() {
         messageDisplay.textContent = "";
         this.textContent = "New Colors";
         document.querySelector("h1").style.background = "steelblue";
-        setColors(numOfSquares);
+        setColors(numOfGuesses);
     });
 
-    setColors(numOfSquares);
+    setColors(numOfGuesses);
 }
 
 function setColors(num) {
     colors = generateRandomColors(num);
     winningColor = colors[Math.floor(Math.random() * colors.length)];
     document.getElementById("colorToGuess").textContent = winningColor;
-    for (var i = 0; i < squares.length; i++) {
+    for (var i = 0; i < possibleGuesses.length; i++) {
         if (colors[i]) {
-            squares[i].style.display = "block";
-            squares[i].style.background = colors[i];
+            possibleGuesses[i].style.display = "block";
+            possibleGuesses[i].style.background = colors[i];
         } else {
-            squares[i].style.display = "none";
+            possibleGuesses[i].style.display = "none";
         }
     }
 }
 
-function changeAllSquareColors(color) {
-    for (var i = 0; i < squares.length; i++) {
-        squares[i].style.background = color;
+function changeAllColors(color) {
+    for (var i = 0; i < possibleGuesses.length; i++) {
+        possibleGuesses[i].style.background = color;
     }
 }
 
@@ -120,13 +120,13 @@ function changeMode() {
 
 function setModeOptions(str) {
     if (str === "Easy") {
-        numOfSquares = 3;
+        numOfGuesses = 3;
         document.querySelector("#container").style.maxWidth = "600px";
     } else if (str === "Hard") {
-        numOfSquares = 6;
+        numOfGuesses = 6;
         document.querySelector("#container").style.maxWidth = "600px";
     } else {
-        numOfSquares = 16;
+        numOfGuesses = 16;
         document.querySelector(".mode").innerHTML = "Hardest <span class=\"caret\">";
         document.querySelector("#container").style.maxWidth = "800px";
     }
@@ -146,5 +146,5 @@ function resetText() {
     resetButton.textContent = "New Colors";
     messageDisplay.textContent = "";
     document.querySelector("h1").style.background = "steelblue";
-    setColors(numOfSquares);
+    setColors(numOfGuesses);
 }
