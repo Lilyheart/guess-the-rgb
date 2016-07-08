@@ -123,3 +123,6 @@ button:hover {
     padding: 10px 10px;
     text-align: center;
 }
+#header a {
+    color: steelblue;
+}
