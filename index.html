@@ -1,64 +1,83 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Color Game</title>
-    <!-- Libraries -->
-    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.css">
-    <script src="https://code.jquery.com/jquery-2.2.3.js" integrity="sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="colorgame.css" media="screen" title="no title" charset="utf-8">
-  </head>
-  <body>
-    <!-- <div id="header" class="text-center"> -->
-      <h1>The great <br><span id="colorToGuess">RGB</span><br> guessing game</h1>
-    <!-- </div> -->
-    <div id="stripe">
-      <!-- <button id="reset">New Colors</button> -->
-      <div class="dropdown">
-        <button id="reset">New Colors</span>
-        </button>
-      </div>
-      <span id="message"></span>
-      <!-- mode dropdown -->
-      <div class="dropdown">
-        <button class="dropbtn mode">Mode <div class="arrow-down"></div></button>
-        <div class="dropdown-content">
-          <a href="#" class="modeButton">Easy</a>
-          <a href="#" class="modeButton">Hard</a>
-          <a href="#" class="modeButton">Adam</a>
+    <head>
+        <meta charset="utf-8">
+        <title>Color Game</title>
+        <!-- Libraries -->
+        <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.css">
+        <script src="https://code.jquery.com/jquery-2.2.3.js" integrity="sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4=" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="colorgame.css" media="screen" title="no title" charset="utf-8">
+    </head>
+    <body>
+        <header id="header">
+            <div class="text-center">
+                Guess the color - Created by
+                <a href="https://github.com/Lilyheart/guess-the-rgb">
+                    Lily Romano
+                </a>
+                . Started as part of
+                <a href="https://www.udemy.com/the-web-developer-bootcamp/" target="_blank">
+                    Colt Steele's Web Developer Bootcamp
+                </a>
+                but continued on.
+            </div>
+        </header>
+        <!-- <div id="header" class="text-center"> -->
+        <h1>
+            The great<br>
+            <span id="colorToGuess">RGB</span><br>
+            guessing game
+        </h1>
+        <!-- </div> -->
+        <div id="stripe">
+            <!-- <button id="reset">New Colors</button> -->
+            <div class="dropdown">
+                <button id="reset">New Colors</button>
+            </div>
+            <span id="message"></span>
+            <!-- mode dropdown -->
+            <div class="dropdown">
+                <button class="dropbtn mode">Mode
+                    <div class="arrow-down"></div>
+                </button>
+                <div class="dropdown-content">
+                    <a href="#" class="modeButton">Easy</a>
+                    <a href="#" class="modeButton">Hard</a>
+                    <a href="#" class="modeButton">Adam</a>
+                </div>
+            </div>
+            <!-- range dropdown -->
+            <div class="dropdown">
+                <button class="dropbtn range">Color Range
+                    <div class="arrow-down"></div>
+                </button>
+                <div class="dropdown-content">
+                    <a href="#" class="rangeButton">Full</a>
+                    <!-- <a href="#" class="range">Medium</a> -->
+                    <!-- <a href="#" class="range">Close</a> -->
+                    <a href="#" class="rangeButton">David</a>
+                </div </div>
+            </div>
         </div>
-      </div>
-      <!-- range dropdown -->
-      <div class="dropdown">
-        <button class="dropbtn range">Color Range <div class="arrow-down"></div></button>
-        <div class="dropdown-content">
-          <a href="#" class="rangeButton">Full</a>
-          <!-- <a href="#" class="range">Medium</a> -->
-          <!-- <a href="#" class="range">Close</a> -->
-          <a href="#" class="rangeButton">David</a>
-      </div
-      </div>
-    </div>
-    <div id="container">
-      <div class="colorGuess"></div>
-      <div class="colorGuess"></div>
-      <div class="colorGuess"></div>
-      <div class="colorGuess"></div>
-      <div class="colorGuess"></div>
-      <div class="colorGuess"></div>
-      <div class="colorGuess"></div>
-      <div class="colorGuess"></div>
-      <div class="colorGuess"></div>
-      <div class="colorGuess"></div>
-      <div class="colorGuess"></div>
-      <div class="colorGuess"></div>
-      <div class="colorGuess"></div>
-      <div class="colorGuess"></div>
-      <div class="colorGuess"></div>
-      <div class="colorGuess"></div>
-    </div>
-
-    <script type="text/javascript" src="colorgame.js"></script>
-  </body>
+        <div id="container">
+            <div class="colorGuess"></div>
+            <div class="colorGuess"></div>
+            <div class="colorGuess"></div>
+            <div class="colorGuess"></div>
+            <div class="colorGuess"></div>
+            <div class="colorGuess"></div>
+            <div class="colorGuess"></div>
+            <div class="colorGuess"></div>
+            <div class="colorGuess"></div>
+            <div class="colorGuess"></div>
+            <div class="colorGuess"></div>
+            <div class="colorGuess"></div>
+            <div class="colorGuess"></div>
+            <div class="colorGuess"></div>
+            <div class="colorGuess"></div>
+            <div class="colorGuess"></div>
+        </div>
+        <script type="text/javascript" src="colorgame.js"></script>
+    </body>
 </html>

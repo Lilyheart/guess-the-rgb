@@ -27,9 +27,11 @@ h1 {
 .btn-group {
     height: 100%;
 }
-button, button:focus, .btn{
+.btn,
+button,
+button:focus {
     border: none;
-    border-radius:0;
+    border-radius: 0;
     background: none;
     padding: 0 6px;
     text-transform: uppercase;
@@ -41,7 +43,9 @@ button, button:focus, .btn{
     transition: all 0.3s;
     outline: none !important;
 }
-button:hover, .selected, .dropdown-menu>li>a:hover  {
+.dropdown-menu > li > a:hover,
+.selected,
+button:hover {
     color: white !important;
     background: steelblue;
 }
@@ -57,14 +61,13 @@ button:hover, .selected, .dropdown-menu>li>a:hover  {
     border-top: 5px solid steelblue;
     border-bottom: 4px solid transparent;
 }
-.dropdown-menu>li>a {
+.dropdown-menu > li > a {
     color: steelblue;
 }
 #message {
     display: inline-block;
     width: 10%;
 }
-
 #container {
     margin: 40px auto;
     max-width: 600px;
@@ -109,4 +112,13 @@ button:hover, .selected, .dropdown-menu>li>a:hover  {
 }
 .dropdown:hover .dropdown-content {
     display: block;
+}
+#header {
+    text-transform: none;
+    color: steelblue;
+    background: white;
+}
+#header .text-center {
+    padding: 10px 10px;
+    text-align: center;
 }

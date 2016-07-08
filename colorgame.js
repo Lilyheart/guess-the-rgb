@@ -70,10 +70,10 @@ function generateRandomColors(num) {
     var arr = [];
     arr.push(randomColor());
     for (var i = 1; i < num; i++) {
-        if(colorRange === "Full"){
+        if (colorRange === "Full") {
             arr.push(randomColor());
         } else {
-            arr.push(closeRandomColor(arr[i-1]));
+            arr.push(closeRandomColor(arr[i - 1]));
         }
     }
     arr = shuffleColors(arr);
@@ -94,7 +94,7 @@ function closeRandomColor(str) {
         var variance = Math.floor(Math.random() * 60) * (Math.random() < 0.5 ? -1 : 1);
         console.log(rgb[i] + "+" + variance);
 
-        if(rgb[i] + variance > 255 || rgb[i] + variance < 0) {
+        if (rgb[i] + variance > 255 || rgb[i] + variance < 0) {
             rgb[i] = rgb[i] - variance;
         } else {
             rgb[i] = rgb[i] + variance;
@@ -137,7 +137,7 @@ function setModeOptions(str) {
 }
 
 function changeRange() {
-    if(this.textContent === "Full") {
+    if (this.textContent === "Full") {
         document.querySelector(".range").innerHTML = "Full Colors  <div class=\"arrow-down\"></div>";
     } else {
         document.querySelector(".range").innerHTML = "Close Colors  <div class=\"arrow-down\"></div>";
