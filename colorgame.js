@@ -123,22 +123,24 @@ function changeMode() {
 function setModeOptions(str) {
     if (str === "Easy") {
         numOfGuesses = 3;
+        document.querySelector(".mode").innerHTML = "Easy <div class=\"arrow-down\"></div>";
         document.querySelector("#container").style.maxWidth = "600px";
     } else if (str === "Hard") {
         numOfGuesses = 6;
+        document.querySelector(".mode").innerHTML = "Hard <div class=\"arrow-down\"></div>";
         document.querySelector("#container").style.maxWidth = "600px";
     } else {
         numOfGuesses = 16;
-        document.querySelector(".mode").innerHTML = "Hardest <span class=\"caret\">";
+        document.querySelector(".mode").innerHTML = "Hardest <div class=\"arrow-down\"></div>";
         document.querySelector("#container").style.maxWidth = "800px";
     }
 }
 
 function changeRange() {
     if(this.textContent === "Full") {
-        document.querySelector(".range").innerHTML = "Full Colors <span class=\"caret\">";
+        document.querySelector(".range").innerHTML = "Full Colors  <div class=\"arrow-down\"></div>";
     } else {
-        document.querySelector(".range").innerHTML = "Close Colors <span class=\"caret\">";
+        document.querySelector(".range").innerHTML = "Close Colors  <div class=\"arrow-down\"></div>";
     }
     colorRange = this.textContent;
     resetText();

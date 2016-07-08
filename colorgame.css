@@ -12,6 +12,7 @@ h1 {
     font-weight: normal;
     line-height: 1.1;
     padding: 20px 0;
+    font-size: 36px;
 }
 #colorToGuess {
     font-size: 200%;
@@ -46,6 +47,15 @@ button:hover, .selected, .dropdown-menu>li>a:hover  {
 }
 .btn {
     min-width: 155px;
+}
+.arrow-down {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid steelblue;
+    border-bottom: 4px solid transparent;
 }
 .dropdown-menu>li>a {
     color: steelblue;
