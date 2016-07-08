@@ -13,24 +13,14 @@ init();
 
 function init() {
     for (var i = 0; i < possibleGuesses.length; i++) {
-        possibleGuesses[i].addEventListener("click", function() {
-            if (this.style.background === winningColor) {
-                messageDisplay.textContent = "Correct!";
-                resetButton.textContent = "Play again";
-                changeAllColors(winningColor);
-                document.querySelector("h1").style.background = winningColor;
-            } else {
-                messageDisplay.textContent = "Try Again";
-                this.style.background = background;
-            }
-        });
+        possibleGuesses[i].addEventListener("click", setGuess);
     }
 
-    for (var i = 0; i < modeButtons.length; i++) {
+    for (i = 0; i < modeButtons.length; i++) {
         modeButtons[i].addEventListener("click", changeMode);
     }
 
-    for (var i = 0; i < rangeButtons.length; i++) {
+    for (i = 0; i < rangeButtons.length; i++) {
         rangeButtons[i].addEventListener("click", changeRange);
     }
 
@@ -42,6 +32,18 @@ function init() {
     });
 
     setColors(numOfGuesses);
+}
+
+function setGuess() {
+    if (this.style.background === winningColor) {
+        messageDisplay.textContent = "Correct!";
+        resetButton.textContent = "Play again";
+        changeAllColors(winningColor);
+        document.querySelector("h1").style.background = winningColor;
+    } else {
+        messageDisplay.textContent = "Try Again";
+        this.style.background = background;
+    }
 }
 
 function setColors(num) {
