@@ -1,7 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Montserrat);
 body {
-    background-color: #232323 !important;
-    color: white !important;
+    background-color: #232323;
+    color: white;
     margin: 0;
     font-family: "Montserrat", "Avenir";
     text-transform: uppercase;
@@ -38,16 +38,16 @@ button:focus {
     text-transform: uppercase;
     height: 100%;
     font-weight: 700;
-    color: steelblue !important;
+    color: steelblue;
     letter-spacing: 0.7px;
     font-size: inherit;
     transition: all 0.3s;
-    outline: none !important;
+    outline: none;
 }
 .dropdown-menu > li > a:hover,
 .selected,
 button:hover {
-    color: white !important;
+    color: white;
     background: steelblue;
 }
 .btn {
