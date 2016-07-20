@@ -1,13 +1,12 @@
-var colors,
-    winningColor,
-    numOfGuesses = 6,
-    colorRange = "Full",
-    background = window.getComputedStyle(document.querySelector("body"), null).getPropertyValue("background-color"),
-    possibleGuesses = document.querySelectorAll(".colorGuess"),
+var background = window.getComputedStyle(document.querySelector("body"), null).getPropertyValue("background-color"),
+    colors,
     messageDisplay = document.querySelector("#message"),
-    resetButton = document.getElementById("reset"),
     modeButtons = document.querySelectorAll(".modeButton"),
-    rangeButtons = document.querySelectorAll(".rangeButton");
+    numOfGuesses = 6,
+    possibleGuesses = document.querySelectorAll(".colorGuess"),
+    rangeButtons = document.querySelectorAll(".rangeButton"),
+    resetButton = document.getElementById("reset"),
+    winningColor;
 
 function changeAllColors(color) {
     for (var i = 0; i < possibleGuesses.length; i+=1) {
@@ -44,16 +43,18 @@ function setModeOptions(str) {
 }
 
 function randomColor() {
-    var r = Math.floor(Math.random() * 255),
-        g = Math.floor(Math.random() * 255),
-        b = Math.floor(Math.random() * 255);
+    var b, g, r;
+    r = Math.floor(Math.random() * 255);
+    g = Math.floor(Math.random() * 255);
+    b = Math.floor(Math.random() * 255);
     return "rgb(" + r + ", " + g + ", " + b + ")";
 }
 
 function closeRandomColor(str) {
-    var i, variance,
-        rgb = str.match(/\d+/g);
-    
+    var i,
+        rgb = str.match(/\d+/g),
+        variance;
+
     for (i = 0; i < rgb.length; i+=1) {
         rgb[i] = Number(rgb[i]);
         variance = Math.floor(Math.random() * 60) * (Math.random() < 0.5 ? -1 : 1);
