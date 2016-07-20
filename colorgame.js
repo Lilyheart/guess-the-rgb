@@ -9,29 +9,10 @@ var resetButton = document.getElementById("reset");
 var modeButtons = document.querySelectorAll(".modeButton");
 var rangeButtons = document.querySelectorAll(".rangeButton");
 
-init();
-
-function init() {
+function changeAllColors(color) {
     for (var i = 0; i < possibleGuesses.length; i++) {
-        possibleGuesses[i].addEventListener("click", setGuess);
+        possibleGuesses[i].style.background = color;
     }
-
-    for (i = 0; i < modeButtons.length; i++) {
-        modeButtons[i].addEventListener("click", changeMode);
-    }
-
-    for (i = 0; i < rangeButtons.length; i++) {
-        rangeButtons[i].addEventListener("click", changeRange);
-    }
-
-    resetButton.addEventListener("click", function() {
-        messageDisplay.textContent = "";
-        this.textContent = "New Colors";
-        document.querySelector("h1").style.background = "steelblue";
-        setColors(numOfGuesses);
-    });
-
-    setColors(numOfGuesses);
 }
 
 function setGuess() {
@@ -46,38 +27,43 @@ function setGuess() {
     }
 }
 
-function setColors(num) {
-    colors = generateRandomColors(num);
-    winningColor = colors[Math.floor(Math.random() * colors.length)];
-    document.getElementById("colorToGuess").textContent = winningColor;
-    for (var i = 0; i < possibleGuesses.length; i++) {
-        if (colors[i]) {
-            possibleGuesses[i].style.display = "block";
-            possibleGuesses[i].style.background = colors[i];
-        } else {
-            possibleGuesses[i].style.display = "none";
-        }
+function setModeOptions(str) {
+    if (str === "Easy") {
+        numOfGuesses = 3;
+        document.querySelector(".mode").innerHTML = "Easy <div class=\"arrow-down\"></div>";
+        document.querySelector("#container").style.maxWidth = "600px";
+    } else if (str === "Hard") {
+        numOfGuesses = 6;
+        document.querySelector(".mode").innerHTML = "Hard <div class=\"arrow-down\"></div>";
+        document.querySelector("#container").style.maxWidth = "600px";
+    } else {
+        numOfGuesses = 16;
+        document.querySelector(".mode").innerHTML = "Hardest <div class=\"arrow-down\"></div>";
+        document.querySelector("#container").style.maxWidth = "800px";
     }
 }
 
-function changeAllColors(color) {
-    for (var i = 0; i < possibleGuesses.length; i++) {
-        possibleGuesses[i].style.background = color;
-    }
+function resetText() {
+    resetButton.textContent = "New Colors";
+    messageDisplay.textContent = "";
+    document.querySelector("h1").style.background = "steelblue";
+    setColors(numOfGuesses);
 }
 
-function generateRandomColors(num) {
-    var arr = [];
-    arr.push(randomColor());
-    for (var i = 1; i < num; i++) {
-        if (colorRange === "Full") {
-            arr.push(randomColor());
-        } else {
-            arr.push(closeRandomColor(arr[i - 1]));
-        }
+function changeMode() {
+    document.querySelector(".mode").innerHTML = this.textContent + " <span class=\"caret\">";
+    setModeOptions(this.textContent);
+    resetText();
+}
+
+function changeRange() {
+    if (this.textContent === "Full") {
+        document.querySelector(".range").innerHTML = "Full Colors  <div class=\"arrow-down\"></div>";
+    } else {
+        document.querySelector(".range").innerHTML = "Close Colors  <div class=\"arrow-down\"></div>";
     }
-    arr = shuffleColors(arr);
-    return arr;
+    colorRange = this.textContent;
+    resetText();
 }
 
 function randomColor() {
@@ -114,41 +100,55 @@ function shuffleColors(arr) {
     return arr;
 }
 
-function changeMode() {
-    document.querySelector(".mode").innerHTML = this.textContent + " <span class=\"caret\">";
-    setModeOptions(this.textContent);
-    resetText();
+function generateRandomColors(num) {
+    var arr = [];
+    arr.push(randomColor());
+    for (var i = 1; i < num; i++) {
+        if (colorRange === "Full") {
+            arr.push(randomColor());
+        } else {
+            arr.push(closeRandomColor(arr[i - 1]));
+        }
+    }
+    arr = shuffleColors(arr);
+    return arr;
 }
 
-function setModeOptions(str) {
-    if (str === "Easy") {
-        numOfGuesses = 3;
-        document.querySelector(".mode").innerHTML = "Easy <div class=\"arrow-down\"></div>";
-        document.querySelector("#container").style.maxWidth = "600px";
-    } else if (str === "Hard") {
-        numOfGuesses = 6;
-        document.querySelector(".mode").innerHTML = "Hard <div class=\"arrow-down\"></div>";
-        document.querySelector("#container").style.maxWidth = "600px";
-    } else {
-        numOfGuesses = 16;
-        document.querySelector(".mode").innerHTML = "Hardest <div class=\"arrow-down\"></div>";
-        document.querySelector("#container").style.maxWidth = "800px";
+function setColors(num) {
+    colors = generateRandomColors(num);
+    winningColor = colors[Math.floor(Math.random() * colors.length)];
+    document.getElementById("colorToGuess").textContent = winningColor;
+    for (var i = 0; i < possibleGuesses.length; i++) {
+        if (colors[i]) {
+            possibleGuesses[i].style.display = "block";
+            possibleGuesses[i].style.background = colors[i];
+        } else {
+            possibleGuesses[i].style.display = "none";
+        }
     }
 }
 
-function changeRange() {
-    if (this.textContent === "Full") {
-        document.querySelector(".range").innerHTML = "Full Colors  <div class=\"arrow-down\"></div>";
-    } else {
-        document.querySelector(".range").innerHTML = "Close Colors  <div class=\"arrow-down\"></div>";
+function init() {
+    for (var i = 0; i < possibleGuesses.length; i++) {
+        possibleGuesses[i].addEventListener("click", setGuess);
     }
-    colorRange = this.textContent;
-    resetText();
-}
 
-function resetText() {
-    resetButton.textContent = "New Colors";
-    messageDisplay.textContent = "";
-    document.querySelector("h1").style.background = "steelblue";
+    for (i = 0; i < modeButtons.length; i++) {
+        modeButtons[i].addEventListener("click", changeMode);
+    }
+
+    for (i = 0; i < rangeButtons.length; i++) {
+        rangeButtons[i].addEventListener("click", changeRange);
+    }
+
+    resetButton.addEventListener("click", function() {
+        messageDisplay.textContent = "";
+        this.textContent = "New Colors";
+        document.querySelector("h1").style.background = "steelblue";
+        setColors(numOfGuesses);
+    });
+
     setColors(numOfGuesses);
 }
+
+init();
