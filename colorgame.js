@@ -129,7 +129,9 @@ function generateRandomColors(num) {
 }
 
 function init() {
-    for (var i = 0; i < possibleGuesses.length; i++) {
+    var i;
+
+    for (i = 0; i < possibleGuesses.length; i++) {
         possibleGuesses[i].addEventListener("click", setGuess);
     }
 
