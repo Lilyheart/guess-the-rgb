@@ -15,10 +15,10 @@ h1 {
     padding: 20px 0;
     font-size: 36px;
 }
-#colorToGuess {
+.colorToGuess {
     font-size: 200%;
 }
-#stripe {
+.stripe {
     background: white;
     color: black;
     height: 40px;
@@ -65,11 +65,11 @@ button:hover {
 .dropdown-menu > li > a {
     color: steelblue;
 }
-#message {
+.message {
     display: inline-block;
     width: 10%;
 }
-#container {
+.container {
     margin: 40px auto;
     max-width: 600px;
 }
@@ -115,15 +115,15 @@ button:hover {
 .dropdown:hover .dropdown-content {
     display: block;
 }
-#header {
+.header {
     text-transform: none;
     color: steelblue;
     background: white;
 }
-#header .text-center {
+.header .text-center {
     padding: 10px 10px;
     text-align: center;
 }
-#header a {
+.header a {
     color: steelblue;
 }

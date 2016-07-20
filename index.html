@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="colorgame.css" media="screen" title="no title" charset="utf-8">
     </head>
     <body>
-        <header id="header">
+        <header id="header" class="header">
             <div class="text-center">
                 Guess the color - Created by
                 <a href="https://github.com/Lilyheart/guess-the-rgb">
@@ -19,19 +19,19 @@
                 but continued on.
             </div>
         </header>
-        <!-- <div id="header" class="text-center"> -->
+        <!-- <div id="header" class="header" class="text-center"> -->
         <h1>
             The great<br>
-            <span id="colorToGuess">RGB</span><br>
+            <span id="colorToGuess" class="colorToGuess">RGB</span><br>
             guessing game
         </h1>
         <!-- </div> -->
-        <div id="stripe">
+        <div id="stripe" class="stripe">
             <!-- <button id="reset">New Colors</button> -->
             <div class="dropdown">
                 <button id="reset">New Colors</button>
             </div>
-            <span id="message"></span>
+            <span id="message" class="message"></span>
             <!-- mode dropdown -->
             <div class="dropdown">
                 <button class="dropbtn mode">Mode
@@ -56,7 +56,7 @@
                 </div </div>
             </div>
         </div>
-        <div id="container">
+        <div id="container" class="container">
             <div class="colorGuess"></div>
             <div class="colorGuess"></div>
             <div class="colorGuess"></div>
