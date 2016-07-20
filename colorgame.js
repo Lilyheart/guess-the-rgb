@@ -43,43 +43,6 @@ function setModeOptions(str) {
     }
 }
 
-function setColors(num) {
-    colors = generateRandomColors(num);
-    winningColor = colors[Math.floor(Math.random() * colors.length)];
-    document.getElementById("colorToGuess").textContent = winningColor;
-    for (var i = 0; i < possibleGuesses.length; i++) {
-        if (colors[i]) {
-            possibleGuesses[i].style.display = "block";
-            possibleGuesses[i].style.background = colors[i];
-        } else {
-            possibleGuesses[i].style.display = "none";
-        }
-    }
-}
-
-function resetText() {
-    resetButton.textContent = "New Colors";
-    messageDisplay.textContent = "";
-    document.querySelector("h1").style.background = "steelblue";
-    setColors(numOfGuesses);
-}
-
-function changeMode() {
-    document.querySelector(".mode").innerHTML = this.textContent + " <span class=\"caret\">";
-    setModeOptions(this.textContent);
-    resetText();
-}
-
-function changeRange() {
-    if (this.textContent === "Full") {
-        document.querySelector(".range").innerHTML = "Full Colors  <div class=\"arrow-down\"></div>";
-    } else {
-        document.querySelector(".range").innerHTML = "Close Colors  <div class=\"arrow-down\"></div>";
-    }
-    colorRange = this.textContent;
-    resetText();
-}
-
 function randomColor() {
     var r = Math.floor(Math.random() * 255);
     var g = Math.floor(Math.random() * 255);
@@ -126,6 +89,43 @@ function generateRandomColors(num) {
     }
     arr = shuffleColors(arr);
     return arr;
+}
+
+function setColors(num) {
+    colors = generateRandomColors(num);
+    winningColor = colors[Math.floor(Math.random() * colors.length)];
+    document.getElementById("colorToGuess").textContent = winningColor;
+    for (var i = 0; i < possibleGuesses.length; i++) {
+        if (colors[i]) {
+            possibleGuesses[i].style.display = "block";
+            possibleGuesses[i].style.background = colors[i];
+        } else {
+            possibleGuesses[i].style.display = "none";
+        }
+    }
+}
+
+function resetText() {
+    resetButton.textContent = "New Colors";
+    messageDisplay.textContent = "";
+    document.querySelector("h1").style.background = "steelblue";
+    setColors(numOfGuesses);
+}
+
+function changeMode() {
+    document.querySelector(".mode").innerHTML = this.textContent + " <span class=\"caret\">";
+    setModeOptions(this.textContent);
+    resetText();
+}
+
+function changeRange() {
+    if (this.textContent === "Full") {
+        document.querySelector(".range").innerHTML = "Full Colors  <div class=\"arrow-down\"></div>";
+    } else {
+        document.querySelector(".range").innerHTML = "Close Colors  <div class=\"arrow-down\"></div>";
+    }
+    colorRange = this.textContent;
+    resetText();
 }
 
 function init() {
