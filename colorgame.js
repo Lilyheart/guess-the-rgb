@@ -1,13 +1,13 @@
-var colors;
-var winningColor;
-var numOfGuesses = 6;
-var colorRange = "Full"; // 0 = full, 1 = david
-var background = window.getComputedStyle(document.querySelector("body"), null).getPropertyValue("background-color");
-var possibleGuesses = document.querySelectorAll(".colorGuess");
-var messageDisplay = document.querySelector("#message");
-var resetButton = document.getElementById("reset");
-var modeButtons = document.querySelectorAll(".modeButton");
-var rangeButtons = document.querySelectorAll(".rangeButton");
+var colors,
+    winningColor,
+    numOfGuesses = 6,
+    colorRange = "Full",
+    background = window.getComputedStyle(document.querySelector("body"), null).getPropertyValue("background-color"),
+    possibleGuesses = document.querySelectorAll(".colorGuess"),
+    messageDisplay = document.querySelector("#message"),
+    resetButton = document.getElementById("reset"),
+    modeButtons = document.querySelectorAll(".modeButton"),
+    rangeButtons = document.querySelectorAll(".rangeButton");
 
 function changeAllColors(color) {
     for (var i = 0; i < possibleGuesses.length; i+=1) {
@@ -44,17 +44,19 @@ function setModeOptions(str) {
 }
 
 function randomColor() {
-    var r = Math.floor(Math.random() * 255);
-    var g = Math.floor(Math.random() * 255);
-    var b = Math.floor(Math.random() * 255);
+    var r = Math.floor(Math.random() * 255),
+        g = Math.floor(Math.random() * 255),
+        b = Math.floor(Math.random() * 255);
     return "rgb(" + r + ", " + g + ", " + b + ")";
 }
 
 function closeRandomColor(str) {
-    var rgb = str.match(/\d+/g);
-    for (var i = 0; i < rgb.length; i+=1) {
+    var i, variance,
+        rgb = str.match(/\d+/g);
+    
+    for (i = 0; i < rgb.length; i+=1) {
         rgb[i] = Number(rgb[i]);
-        var variance = Math.floor(Math.random() * 60) * (Math.random() < 0.5 ? -1 : 1);
+        variance = Math.floor(Math.random() * 60) * (Math.random() < 0.5 ? -1 : 1);
         console.log(rgb[i] + "+" + variance);
 
         if (rgb[i] + variance > 255 || rgb[i] + variance < 0) {
@@ -68,9 +70,10 @@ function closeRandomColor(str) {
 
 //Using Durstenfeld shuffle algorithm.
 function shuffleColors(arr) {
-    for (var i = arr.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var temp = arr[i];
+    var i, j, temp;
+    for (i = arr.length - 1; i > 0; i--) {
+        j = Math.floor(Math.random() * (i + 1));
+        temp = arr[i];
         arr[i] = arr[j];
         arr[j] = temp;
     }
@@ -78,9 +81,9 @@ function shuffleColors(arr) {
 }
 
 function generateRandomColors(num) {
-    var arr = [];
+    var arr = [], i;
     arr.push(randomColor());
-    for (var i = 1; i < num; i+=1) {
+    for (i = 1; i < num; i+=1) {
         if (colorRange === "Full") {
             arr.push(randomColor());
         } else {
