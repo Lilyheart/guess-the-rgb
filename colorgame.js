@@ -10,7 +10,7 @@ var modeButtons = document.querySelectorAll(".modeButton");
 var rangeButtons = document.querySelectorAll(".rangeButton");
 
 function changeAllColors(color) {
-    for (var i = 0; i < possibleGuesses.length; i++) {
+    for (var i = 0; i < possibleGuesses.length; i+=1) {
         possibleGuesses[i].style.background = color;
     }
 }
@@ -52,7 +52,7 @@ function randomColor() {
 
 function closeRandomColor(str) {
     var rgb = str.match(/\d+/g);
-    for (var i = 0; i < rgb.length; i++) {
+    for (var i = 0; i < rgb.length; i+=1) {
         rgb[i] = Number(rgb[i]);
         var variance = Math.floor(Math.random() * 60) * (Math.random() < 0.5 ? -1 : 1);
         console.log(rgb[i] + "+" + variance);
@@ -80,7 +80,7 @@ function shuffleColors(arr) {
 function generateRandomColors(num) {
     var arr = [];
     arr.push(randomColor());
-    for (var i = 1; i < num; i++) {
+    for (var i = 1; i < num; i+=1) {
         if (colorRange === "Full") {
             arr.push(randomColor());
         } else {
@@ -95,7 +95,7 @@ function setColors(num) {
     colors = generateRandomColors(num);
     winningColor = colors[Math.floor(Math.random() * colors.length)];
     document.getElementById("colorToGuess").textContent = winningColor;
-    for (var i = 0; i < possibleGuesses.length; i++) {
+    for (var i = 0; i < possibleGuesses.length; i+=1) {
         if (colors[i]) {
             possibleGuesses[i].style.display = "block";
             possibleGuesses[i].style.background = colors[i];
@@ -131,15 +131,15 @@ function changeRange() {
 function init() {
     var i;
 
-    for (i = 0; i < possibleGuesses.length; i++) {
+    for (i = 0; i < possibleGuesses.length; i+=1) {
         possibleGuesses[i].addEventListener("click", setGuess);
     }
 
-    for (i = 0; i < modeButtons.length; i++) {
+    for (i = 0; i < modeButtons.length; i+=1) {
         modeButtons[i].addEventListener("click", changeMode);
     }
 
-    for (i = 0; i < rangeButtons.length; i++) {
+    for (i = 0; i < rangeButtons.length; i+=1) {
         rangeButtons[i].addEventListener("click", changeRange);
     }
 
