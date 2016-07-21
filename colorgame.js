@@ -1,4 +1,5 @@
 var background = window.getComputedStyle(document.querySelector("body"), null).getPropertyValue("background-color"),
+    colorRange = "Full",
     colors,
     messageDisplay = document.querySelector("#message"),
     modeButtons = document.querySelectorAll(".modeButton"),
