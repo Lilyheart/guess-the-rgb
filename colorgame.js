@@ -24,7 +24,7 @@ function getBackgroundColor() {
 }
 
 function changeAllColors(color) {
-    for (var i = 0; i < possibleGuesses.length; i+=1) {
+    for (var i = 0; i < possibleGuesses.length; i += 1) {
         possibleGuesses[i].style.background = color;
     }
 }
@@ -61,11 +61,10 @@ function selectModeOptions(str) {
 }
 
 function randomColor() {
-    var b, g, r;
-    r = Math.floor(Math.random() * MAX_RGB);
-    g = Math.floor(Math.random() * MAX_RGB);
-    b = Math.floor(Math.random() * MAX_RGB);
-    return "rgb(" + r + ", " + g + ", " + b + ")";
+    var blue = Math.floor(Math.random() * MAX_RGB),
+        green = Math.floor(Math.random() * MAX_RGB),
+        red = Math.floor(Math.random() * MAX_RGB);
+    return "rgb(" + red + ", " + green + ", " + blue + ")";
 }
 
 function closeRandomColor(str) {
@@ -73,7 +72,7 @@ function closeRandomColor(str) {
         rgb = str.match(/\d+/g),
         variance;
 
-    for (i = 0; i < rgb.length; i+=1) {
+    for (i = 0; i < rgb.length; i += 1) {
         rgb[i] = Number(rgb[i]);
         if (Math.round(Math.random()) === 0) {
             variance = Math.floor(Math.random() * closeColorRange);
@@ -92,12 +91,12 @@ function closeRandomColor(str) {
 
 //Using Durstenfeld shuffle algorithm.
 function shuffleColors(arr) {
-    var i, j, temp;
-    for (i = arr.length - 1; i > 0; i-=1) {
-        j = Math.floor(Math.random() * (i + 1));
+    var i, swap, temp;
+    for (i = arr.length - 1; i > 0; i -= 1) {
+        swap = Math.floor(Math.random() * (i + 1));
         temp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = temp;
+        arr[i] = arr[swap];
+        arr[swap] = temp;
     }
     return arr;
 }
@@ -105,7 +104,7 @@ function shuffleColors(arr) {
 function generateRandomColors(num) {
     var arr = [], i;
     arr.push(randomColor());
-    for (i = 1; i < num; i+=1) {
+    for (i = 1; i < num; i += 1) {
         if (colorRange === "Full") {
             arr.push(randomColor());
         } else {
@@ -120,7 +119,7 @@ function setColors(num) {
     colors = generateRandomColors(num);
     winningColor = colors[Math.floor(Math.random() * colors.length)];
     document.getElementById("colorToGuess").textContent = winningColor;
-    for (var i = 0; i < possibleGuesses.length; i+=1) {
+    for (var i = 0; i < possibleGuesses.length; i += 1) {
         if (colors[i]) {
             possibleGuesses[i].style.display = "block";
             possibleGuesses[i].style.background = colors[i];
@@ -159,15 +158,15 @@ function changeRange() {
 function init() {
     var i;
 
-    for (i = 0; i < possibleGuesses.length; i+=1) {
+    for (i = 0; i < possibleGuesses.length; i += 1) {
         possibleGuesses[i].addEventListener("click", setGuess);
     }
 
-    for (i = 0; i < modeButtons.length; i+=1) {
+    for (i = 0; i < modeButtons.length; i += 1) {
         modeButtons[i].addEventListener("click", changeMode);
     }
 
-    for (i = 0; i < rangeButtons.length; i+=1) {
+    for (i = 0; i < rangeButtons.length; i += 1) {
         rangeButtons[i].addEventListener("click", changeRange);
     }
 
@@ -177,7 +176,6 @@ function init() {
         document.querySelector("h1").style.background = "steelblue";
         setColors(numOfGuesses);
     });
-
     setColors(numOfGuesses);
 }
 
