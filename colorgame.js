@@ -41,8 +41,8 @@ function setGuess() {
     }
 }
 
-function setModeOptions(numOfGuesses, difficulty, width) {
-    numOfGuesses = numOfGuesses;
+function setModeOptions(totalGuesses, difficulty, width) {
+    numOfGuesses = totalGuesses;
     modeElement.innerHTML = difficulty + " <div class=\"arrow-down\"></div>";
     document.querySelector("#container").style.maxWidth = width;
 }
