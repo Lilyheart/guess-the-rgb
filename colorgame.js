@@ -65,8 +65,7 @@ function closeRandomColor(str) {
         } else {
             variance = -Math.floor(Math.random() * closeColorRange);
         }
-        console.log(rgb[i] + "+" + variance);
-
+        
         if (rgb[i] + variance > TOTAL_NUMBER_OF_COLORS || rgb[i] + variance < 0) {
             rgb[i] = rgb[i] - variance;
         } else {
