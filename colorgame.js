@@ -1,4 +1,5 @@
 var background = window.getComputedStyle(document.querySelector("body"), null).getPropertyValue("background-color"),
+    closeColorRange = 60,
     colorRange = "Full",
     colors,
     messageDisplay = document.querySelector("#message"),
@@ -7,6 +8,7 @@ var background = window.getComputedStyle(document.querySelector("body"), null).g
     possibleGuesses = document.querySelectorAll(".colorGuess"),
     rangeButtons = document.querySelectorAll(".rangeButton"),
     resetButton = document.getElementById("reset"),
+    TOTAL_NUMBER_OF_COLORS = 255,
     winningColor;
 
 function changeAllColors(color) {
@@ -45,9 +47,9 @@ function setModeOptions(str) {
 
 function randomColor() {
     var b, g, r;
-    r = Math.floor(Math.random() * 255);
-    g = Math.floor(Math.random() * 255);
-    b = Math.floor(Math.random() * 255);
+    r = Math.floor(Math.random() * TOTAL_NUMBER_OF_COLORS);
+    g = Math.floor(Math.random() * TOTAL_NUMBER_OF_COLORS);
+    b = Math.floor(Math.random() * TOTAL_NUMBER_OF_COLORS);
     return "rgb(" + r + ", " + g + ", " + b + ")";
 }
 
@@ -58,10 +60,14 @@ function closeRandomColor(str) {
 
     for (i = 0; i < rgb.length; i+=1) {
         rgb[i] = Number(rgb[i]);
-        variance = Math.floor(Math.random() * 60) * (Math.random() < 0.5 ? -1 : 1);
+        if (Math.round(Math.random()) === 0) {
+            variance = Math.floor(Math.random() * closeColorRange);
+        } else {
+            variance = -Math.floor(Math.random() * closeColorRange);
+        }
         console.log(rgb[i] + "+" + variance);
 
-        if (rgb[i] + variance > 255 || rgb[i] + variance < 0) {
+        if (rgb[i] + variance > TOTAL_NUMBER_OF_COLORS || rgb[i] + variance < 0) {
             rgb[i] = rgb[i] - variance;
         } else {
             rgb[i] = rgb[i] + variance;
@@ -73,7 +79,7 @@ function closeRandomColor(str) {
 //Using Durstenfeld shuffle algorithm.
 function shuffleColors(arr) {
     var i, j, temp;
-    for (i = arr.length - 1; i > 0; i--) {
+    for (i = arr.length - 1; i > 0; i-=1) {
         j = Math.floor(Math.random() * (i + 1));
         temp = arr[i];
         arr[i] = arr[j];
