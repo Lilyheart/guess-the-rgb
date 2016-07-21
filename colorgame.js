@@ -24,7 +24,9 @@ function getBackgroundColor() {
 }
 
 function changeAllColors(color) {
-    for (var i = 0; i < possibleGuesses.length; i += 1) {
+    var i;
+
+    for (i = 0; i < possibleGuesses.length; i += 1) {
         possibleGuesses[i].style.background = color;
     }
 }
@@ -64,6 +66,7 @@ function randomColor() {
     var blue = Math.floor(Math.random() * MAX_RGB),
         green = Math.floor(Math.random() * MAX_RGB),
         red = Math.floor(Math.random() * MAX_RGB);
+
     return "rgb(" + red + ", " + green + ", " + blue + ")";
 }
 
@@ -81,28 +84,33 @@ function closeRandomColor(str) {
         }
 
         if (rgb[i] + variance > MAX_RGB || rgb[i] + variance < 0) {
-            rgb[i] = rgb[i] - variance;
+            rgb[i] -= variance;
         } else {
-            rgb[i] = rgb[i] + variance;
+            rgb[i] += variance;
         }
     }
+
     return "rgb(" + rgb[0] + ", " + rgb[1] + ", " + rgb[2] + ")";
 }
 
 //Using Durstenfeld shuffle algorithm.
 function shuffleColors(arr) {
     var i, swap, temp;
+
     for (i = arr.length - 1; i > 0; i -= 1) {
         swap = Math.floor(Math.random() * (i + 1));
         temp = arr[i];
         arr[i] = arr[swap];
         arr[swap] = temp;
     }
+
     return arr;
 }
 
 function generateRandomColors(num) {
-    var arr = [], i;
+    var arr = [],
+        i;
+
     arr.push(randomColor());
     for (i = 1; i < num; i += 1) {
         if (colorRange === "Full") {
@@ -170,7 +178,7 @@ function init() {
         rangeButtons[i].addEventListener("click", changeRange);
     }
 
-    resetButton.addEventListener("click", function() {
+    resetButton.addEventListener("click", function reset() {
         messageDisplay.textContent = "";
         this.textContent = "New Colors";
         document.querySelector("h1").style.background = "steelblue";
