@@ -1,15 +1,27 @@
-var background = window.getComputedStyle(document.querySelector("body"), null).getPropertyValue("background-color"),
-    closeColorRange = 60,
+var closeColorRange = 60,
     colorRange = "Full",
     colors,
+    MAX_RGB = 255,
     messageDisplay = document.querySelector("#message"),
     modeButtons = document.querySelectorAll(".modeButton"),
+    modeElement = document.querySelector(".mode"),
     numOfGuesses = 6,
     possibleGuesses = document.querySelectorAll(".colorGuess"),
     rangeButtons = document.querySelectorAll(".rangeButton"),
     resetButton = document.getElementById("reset"),
-    TOTAL_NUMBER_OF_COLORS = 255,
     winningColor;
+
+function getBackgroundColor() {
+    var backgroundColor,
+        element,
+        style;
+
+    element = document.querySelector("body");
+    style = window.getComputedStyle(element, null);
+    backgroundColor = style.getPropertyValue("background-color");
+
+    return backgroundColor;
+}
 
 function changeAllColors(color) {
     for (var i = 0; i < possibleGuesses.length; i+=1) {
@@ -25,31 +37,34 @@ function setGuess() {
         document.querySelector("h1").style.background = winningColor;
     } else {
         messageDisplay.textContent = "Try Again";
-        this.style.background = background;
+        this.style.background = getBackgroundColor();
     }
 }
 
-function setModeOptions(str) {
+function setModeOptions(numOfGuesses, difficulty, width) {
+    numOfGuesses = numOfGuesses;
+    modeElement.innerHTML = difficulty + " <div class=\"arrow-down\"></div>";
+    document.querySelector("#container").style.maxWidth = width;
+}
+
+function selectModeOptions(str) {
     if (str === "Easy") {
         numOfGuesses = 3;
-        document.querySelector(".mode").innerHTML = "Easy <div class=\"arrow-down\"></div>";
-        document.querySelector("#container").style.maxWidth = "600px";
+        setModeOptions(numOfGuesses, "Easy", "600px");
     } else if (str === "Hard") {
         numOfGuesses = 6;
-        document.querySelector(".mode").innerHTML = "Hard <div class=\"arrow-down\"></div>";
-        document.querySelector("#container").style.maxWidth = "600px";
+        setModeOptions(numOfGuesses, "Hard", "600px");
     } else {
         numOfGuesses = 16;
-        document.querySelector(".mode").innerHTML = "Hardest <div class=\"arrow-down\"></div>";
-        document.querySelector("#container").style.maxWidth = "800px";
+        setModeOptions(numOfGuesses, "Hardest", "800px");
     }
 }
 
 function randomColor() {
     var b, g, r;
-    r = Math.floor(Math.random() * TOTAL_NUMBER_OF_COLORS);
-    g = Math.floor(Math.random() * TOTAL_NUMBER_OF_COLORS);
-    b = Math.floor(Math.random() * TOTAL_NUMBER_OF_COLORS);
+    r = Math.floor(Math.random() * MAX_RGB);
+    g = Math.floor(Math.random() * MAX_RGB);
+    b = Math.floor(Math.random() * MAX_RGB);
     return "rgb(" + r + ", " + g + ", " + b + ")";
 }
 
@@ -65,8 +80,8 @@ function closeRandomColor(str) {
         } else {
             variance = -Math.floor(Math.random() * closeColorRange);
         }
-        
-        if (rgb[i] + variance > TOTAL_NUMBER_OF_COLORS || rgb[i] + variance < 0) {
+
+        if (rgb[i] + variance > MAX_RGB || rgb[i] + variance < 0) {
             rgb[i] = rgb[i] - variance;
         } else {
             rgb[i] = rgb[i] + variance;
@@ -123,17 +138,20 @@ function resetText() {
 }
 
 function changeMode() {
-    document.querySelector(".mode").innerHTML = this.textContent + " <span class=\"caret\">";
-    setModeOptions(this.textContent);
+    modeElement.innerHTML = this.textContent + " <span class=\"caret\">";
+    selectModeOptions(this.textContent);
     resetText();
 }
 
 function changeRange() {
+    var rangeText;
+
     if (this.textContent === "Full") {
-        document.querySelector(".range").innerHTML = "Full Colors  <div class=\"arrow-down\"></div>";
+        rangeText = "Full Colors  <div class=\"arrow-down\"></div>";
     } else {
-        document.querySelector(".range").innerHTML = "Close Colors  <div class=\"arrow-down\"></div>";
+        rangeText = "Close Colors  <div class=\"arrow-down\"></div>";
     }
+    document.querySelector(".range").innerHTML = rangeText;
     colorRange = this.textContent;
     resetText();
 }
