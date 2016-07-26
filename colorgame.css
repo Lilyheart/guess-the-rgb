@@ -127,3 +127,19 @@ button:hover {
 .header a {
     color: steelblue;
 }
+h1 .fa-info-circle {
+    font-size: 0.6em;
+    vertical-align: middle;
+}
+.fa-info-circle .dropdown-content {
+    background-color: white;
+    z-index: 2;
+    padding: 20px;
+    border-radius: 10%;
+    min-width: 200px;
+}
+.fa-info-circle p {
+    font-family: "Montserrat", "Avenir";
+    text-transform: none;
+    color: steelblue;
+}
