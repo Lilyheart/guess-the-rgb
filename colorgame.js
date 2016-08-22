@@ -163,10 +163,24 @@ function rgbTOhsl(rgb) {
     return 'hsl(' + Math.round(hue) + ', ' + Math.round(sat * PERCENT) + '%, ' + Math.round(lum * PERCENT) + '%)';
 }
 
+function rgbTOhex(rgb) {
+    var winningText = '#',
+        HEX = 16,
+        i;
+
+    for (i = 0; i < rgb.length; i += 1) {
+        if (Number(rgb[i]).toString(HEX).length === 1) {
+            winningText += '0';
+        }
+        winningText += Number(rgb[i]).toString(HEX);
+    }
+
+    return winningText;
+}
+
 function setwinningText(winningRGB) {
     var winningText,
-        rgb = winningRGB.match(/\d+/g),
-        HEX = 16;
+        rgb = winningRGB.match(/\d+/g);
 
     switch (colorStyle) {
         case 'RGB':
@@ -176,9 +190,7 @@ function setwinningText(winningRGB) {
             winningText = rgbTOhsl(rgb);
             break;
         case 'HEX':
-            winningText = '#' + Number(rgb[0]).toString(HEX);
-            winningText += Number(rgb[1]).toString(HEX);
-            winningText += Number(rgb[2]).toString(HEX);
+            winningText = rgbTOhex(rgb);
             break;
         default:
     }
