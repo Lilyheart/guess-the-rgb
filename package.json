@@ -1,0 +1,35 @@
+{
+  "name": "guess-the-rgb",
+  "version": "1.0.1",
+  "description": "JS based game to learn color rgb hsl and hex",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lilyheart/guess-the-rgb.git"
+  },
+  "keywords": [
+    "rgb",
+    "hsl",
+    "color"
+  ],
+  "author": "Lily Romano",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Lilyheart/guess-the-rgb/issues"
+  },
+  "homepage": "https://lilyheart.github.io/guess-the-rgb/",
+  "devDependencies": {
+    "browser-sync": "^2.14.0",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-eslint": "^3.0.1",
+    "gulp-if": "^2.0.1",
+    "gulp-notify": "^2.2.0",
+    "gulp-plumber": "^1.1.0",
+    "gulp-util": "^3.0.7",
+    "gulp-watch": "^4.3.9"
+  }
+}
