@@ -30,7 +30,7 @@ gulp.task('browserSync', function() {
     server: {
       baseDir: '.'
     },
-    tunnel: true,
+    // tunnel: true,
     online: true
   });
 });

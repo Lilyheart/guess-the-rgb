@@ -1,15 +1,12 @@
-var closeColorRange = 60,
-    colorRange = 'Full',
-    colors,
+var colorRange = 'Full',
+    colorStyle = 'RGB',
     MAX_RGB = 255,
     messageDisplay = document.querySelector('#message'),
-    modeButtons = document.querySelectorAll('.modeButton'),
     modeElement = document.querySelector('.mode'),
     numOfGuesses = 6,
     possibleGuesses = document.querySelectorAll('.colorGuess'),
-    rangeButtons = document.querySelectorAll('.rangeButton'),
     resetButton = document.getElementById('reset'),
-    winningColor;
+    winningRGBColor;
 
 function getBackgroundColor() {
     var backgroundColor,
@@ -32,11 +29,11 @@ function changeAllColors(color) {
 }
 
 function setGuess() {
-    if (this.style.background === winningColor) {
+    if (this.style.background === winningRGBColor) {
         messageDisplay.textContent = 'Correct!';
         resetButton.textContent = 'Play again';
-        changeAllColors(winningColor);
-        document.querySelector('h1').style.background = winningColor;
+        changeAllColors(winningRGBColor);
+        document.querySelector('h1').style.background = winningRGBColor;
     } else {
         messageDisplay.textContent = 'Try Again';
         this.style.background = getBackgroundColor();
@@ -73,7 +70,8 @@ function randomColor() {
 function closeRandomColor(str) {
     var i,
         rgb = str.match(/\d+/g),
-        variance;
+        variance,
+        closeColorRange = 60;
 
     for (i = 0; i < rgb.length; i += 1) {
         rgb[i] = Number(rgb[i]);
@@ -120,14 +118,82 @@ function generateRandomColors(num) {
         }
     }
     arr = shuffleColors(arr);
+
     return arr;
 }
 
+// http://www.niwa.nu/2013/05/math-behind-colorspace-conversions-rgb-hsl/
+function rgbTOhsl(rgb) {
+    var redRange = rgb[0] / MAX_RGB,
+        greenRange = rgb[1] / MAX_RGB,
+        blueRange = rgb[2] / MAX_RGB,
+        LUM_CALC = 2,
+        GREEN_HUE_CALC = 2,
+        BLUE_HUE_CALC = 4,
+        DEGREES_CALC = 60,
+        FULL_CIRCLE = 360,
+        HALF = 0.5,
+        SAT_CALC = 2,
+        PERCENT = 100,
+        max = Math.max(redRange, greenRange, blueRange),
+        min = Math.min(redRange, greenRange, blueRange),
+        hue,
+        sat,
+        lum = (max + min) / LUM_CALC;
+
+    if (max === min) {
+        hue = sat = 0;
+    } else {
+        switch (max) {
+            case redRange: hue = ((greenRange - blueRange) / (max - min)) * DEGREES_CALC; break;
+            case greenRange: hue = (GREEN_HUE_CALC + (blueRange - redRange) / (max - min)) * DEGREES_CALC; break;
+            default: hue = (BLUE_HUE_CALC + (redRange - greenRange) / (max - min)) * DEGREES_CALC;
+        }
+        if (hue < 0) {
+            hue += FULL_CIRCLE;
+        }
+
+        if (lum < HALF) {
+            sat = (max - min) / (max + min);
+        } else {
+            sat = (max - min) / (SAT_CALC - max - min);
+        }
+    }
+
+    return 'hsl(' + Math.round(hue) + ', ' + Math.round(sat * PERCENT) + '%, ' + Math.round(lum * PERCENT) + '%)';
+}
+
+function setwinningText(winningRGB) {
+    var winningText,
+        rgb = winningRGB.match(/\d+/g),
+        HEX = 16;
+
+    switch (colorStyle) {
+        case 'RGB':
+            winningText = winningRGB;
+            break;
+        case 'HSL':
+            winningText = rgbTOhsl(rgb);
+            break;
+        case 'HEX':
+            winningText = '#' + Number(rgb[0]).toString(HEX);
+            winningText += Number(rgb[1]).toString(HEX);
+            winningText += Number(rgb[2]).toString(HEX);
+            break;
+        default:
+    }
+
+    document.getElementById('colorToGuess').textContent = winningText;
+}
+
 function setColors(num) {
+    var i,
+    colors;
+
     colors = generateRandomColors(num);
-    winningColor = colors[Math.floor(Math.random() * colors.length)];
-    document.getElementById('colorToGuess').textContent = winningColor;
-    for (var i = 0; i < possibleGuesses.length; i += 1) {
+    winningRGBColor = colors[Math.floor(Math.random() * colors.length)];
+    setwinningText(winningRGBColor);
+    for (i = 0; i < possibleGuesses.length; i += 1) {
         if (colors[i]) {
             possibleGuesses[i].style.display = 'block';
             possibleGuesses[i].style.background = colors[i];
@@ -163,27 +229,43 @@ function changeRange() {
     resetText();
 }
 
+function changeModel() {
+    var modelText,
+        modelElement = document.querySelector('.model');
+
+    if (this.textContent === 'Phy (HSL)') {
+        modelText = 'HSL';
+    } else {
+        modelText = this.textContent;
+    }
+
+    modelElement.innerHTML = modelText + '  <div class="arrow-down"></div>';
+    colorStyle = modelText;
+    resetText();
+}
+
+function reset() {
+    messageDisplay.textContent = '';
+    this.textContent = 'New Colors';
+    document.querySelector('h1').style.background = 'steelblue';
+    setColors(numOfGuesses);
+}
+
+function settingListeners() {
+    var i,
+        modeButtons = document.querySelectorAll('.modeButton'),
+        rangeButtons = document.querySelectorAll('.rangeButton'),
+        modelButtons = document.querySelectorAll('.modelButton');
+
+    for (i = 0; i < possibleGuesses.length; i += 1) {possibleGuesses[i].addEventListener('click', setGuess);}
+    for (i = 0; i < modeButtons.length; i += 1) {modeButtons[i].addEventListener('click', changeMode);}
+    for (i = 0; i < rangeButtons.length; i += 1) {rangeButtons[i].addEventListener('click', changeRange);}
+    for (i = 0; i < modelButtons.length; i += 1) {modelButtons[i].addEventListener('click', changeModel);}
+}
+
 function init() {
-    var i;
-
-    for (i = 0; i < possibleGuesses.length; i += 1) {
-        possibleGuesses[i].addEventListener('click', setGuess);
-    }
-
-    for (i = 0; i < modeButtons.length; i += 1) {
-        modeButtons[i].addEventListener('click', changeMode);
-    }
-
-    for (i = 0; i < rangeButtons.length; i += 1) {
-        rangeButtons[i].addEventListener('click', changeRange);
-    }
-
-    resetButton.addEventListener('click', function reset() {
-        messageDisplay.textContent = '';
-        this.textContent = 'New Colors';
-        document.querySelector('h1').style.background = 'steelblue';
-        setColors(numOfGuesses);
-    });
+    settingListeners();
+    resetButton.addEventListener('click', reset);
     setColors(numOfGuesses);
 }
 
