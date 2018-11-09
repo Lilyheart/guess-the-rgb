@@ -7,7 +7,7 @@ Guess-the-RGB is a project that was completed as a part of [Colt Steele's bootca
 [![Gitter](https://img.shields.io/gitter/room/Lilyheart/LilyPrograms.js.svg?maxAge=2592000)](https://gitter.im/Lilyheart/LilyPrograms) 
 [![GitHub issues](https://img.shields.io/github/issues/Lilyheart/guess-the-rgb.svg?maxAge=2592000)](https://github.com/Lilyheart/guess-the-rgb/issues) 
 [![license](https://img.shields.io/github/license/Lilyheart/guess-the-rgb.svg?maxAge=2592000)](https://github.com/Lilyheart/guess-the-rgb/blob/gh-pages/LICENSE)
-[![Codacy grade](https://img.shields.io/codacy/grade/8019b104081f4c07a6fad23f5711306c.svg?maxAge=2592000)](https://www.codacy.com/app/purplelilyheart/guess-the-rgb/dashboard)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/13333a2d82db4f20b01a883e560c94fd)](https://www.codacy.com/app/lilyheart/guess-the-rgb?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Lilyheart/guess-the-rgb&amp;utm_campaign=Badge_Grade)
 
 ## Deployed
 
