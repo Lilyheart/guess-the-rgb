@@ -24,3 +24,4 @@ The game is deployed [here](https://lilyheart.github.io/guess-the-rgb/) on GitHu
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
+
